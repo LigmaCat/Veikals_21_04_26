@@ -1,23 +1,37 @@
 <h1>Customers</h1>
 
-<table border="1" style="width:80%; font-size:18px; border-collapse: collapse;">
-    <tr style="background:#f2f2f2;">
-        <th style="padding:10px;">ID</th>
-        <th style="padding:10px;">Name</th>
-        <th style="padding:10px;">Email</th>
-    </tr>
+<a href="/customers?with-orders=full">
+    <button type="button">Show orders</button>
+</a>
 
-    <?php foreach ($customers as $row): ?>
-        <tr>
-            <td style="padding:10px;">
-                <?= htmlspecialchars($row['customer_id']) ?>
-            </td>
-            <td style="padding:10px;">
-                <?= htmlspecialchars($row['first_name']) ?>
-            </td>
-            <td style="padding:10px;">
-                <?= htmlspecialchars($row['email']) ?>
-            </td>
-        </tr>
+<ul>
+    <?php foreach ($customers as $customer): ?>
+        <li>
+            <strong>
+                <?= htmlspecialchars($customer['first_name']) ?>
+            </strong>
+
+<!-- ORDERS -->
+<?php if (!empty($customer['orders'])): ?>
+    <ul>
+        <?php foreach ($customer['orders'] as $order): ?>
+            <li>
+                <strong>Date:</strong>
+                <?= htmlspecialchars($order['date'] ?? '') ?><br>
+
+                <strong>Arrived date:</strong>
+                <?= htmlspecialchars($order['arrived_date'] ?? '-') ?><br>
+
+                <strong>Status:</strong>
+                <?= htmlspecialchars($order['status'] ?? '') ?><br>
+
+                <strong>Comments:</strong>
+                <?= htmlspecialchars($order['comments'] ?? '') ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+
+        </li>
     <?php endforeach; ?>
-</table>
+</ul>
