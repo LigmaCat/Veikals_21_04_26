@@ -1,5 +1,9 @@
 <?php
 
+require_once __DIR__ . '/../config.php';
+
+loadEnv(__DIR__ . '/../.env');
+
 class DB {
 
     public static $pdo = null;
@@ -7,10 +11,11 @@ class DB {
     public static function connect() {
 
         if (self::$pdo === null) {
+
             self::$pdo = new PDO(
-                "mysql:host=172.31.224.1;dbname=store_dev_130426;charset=utf8",
-                "store_app_210426",
-                "password"
+                "mysql:host=" . $_ENV['DB_HOST'] . ";dbname=" . $_ENV['DB_NAME'] . ";charset=utf8",
+                $_ENV['DB_USER'],
+                $_ENV['DB_PASS']
             );
 
             self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -19,11 +24,7 @@ class DB {
         return self::$pdo;
     }
 
-    public static function query($sqlQuery) {
-
-        $pdo = self::connect();
-        $stmt = $pdo->query($sqlQuery);
-
-        return $stmt;
+    public static function query($sql) {
+        return self::connect()->query($sql);
     }
 }
