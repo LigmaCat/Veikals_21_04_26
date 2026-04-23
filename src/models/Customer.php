@@ -40,4 +40,22 @@ class Customer {
 
         return array_values($customers);
     }
+
+    public static function getAll() {
+
+    $result = DB::query("SELECT * FROM customers");
+
+    $customers = [];
+
+    foreach ($result as $row) {
+        $customers[] = [
+            'customer_id' => $row['customer_id'],
+            'first_name' => $row['first_name'],
+            'email' => $row['email'],
+            'orders' => [] // keep structure consistent
+        ];
+    }
+
+    return $customers;
+}
 }

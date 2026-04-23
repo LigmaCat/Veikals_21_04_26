@@ -1,7 +1,11 @@
 <h1>Customers</h1>
 
-<a href="/customers?with-orders=full">
-    <button type="button">Show orders</button>
+<?php $showOrders = ($_GET['with-orders'] ?? null) === 'full'; ?>
+
+<a href="/customers<?= $showOrders ? '' : '?with-orders=full' ?>">
+    <button type="button">
+        <?= $showOrders ? 'Hide orders' : 'Show orders' ?>
+    </button>
 </a>
 
 <ul>
@@ -12,7 +16,7 @@
             </strong>
 
 <!-- ORDERS -->
-<?php if (!empty($customer['orders'])): ?>
+<?php if ($showOrders && !empty($customer['orders'])): ?>
     <ul>
         <?php foreach ($customer['orders'] as $index => $order): ?>
             <li style="margin-bottom: 15px;">
