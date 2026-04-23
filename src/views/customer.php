@@ -14,8 +14,14 @@
 <!-- ORDERS -->
 <?php if (!empty($customer['orders'])): ?>
     <ul>
-        <?php foreach ($customer['orders'] as $order): ?>
-            <li>
+        <?php foreach ($customer['orders'] as $index => $order): ?>
+            <li style="margin-bottom: 15px;">
+
+                <strong style="font-size: 16px;">
+                    Order <?= $index + 1 ?>
+                </strong>
+                <hr>
+
                 <strong>Date:</strong>
                 <?= htmlspecialchars($order['date'] ?? '') ?><br>
 
@@ -27,6 +33,7 @@
 
                 <strong>Comments:</strong>
                 <?= htmlspecialchars($order['comments'] ?? '') ?>
+
             </li>
         <?php endforeach; ?>
     </ul>

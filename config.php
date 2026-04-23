@@ -13,6 +13,12 @@ function loadEnv($path) {
 
         list($key, $value) = explode('=', $line, 2);
 
-        $_ENV[$key] = trim($value);
+        $key = trim($key);
+        $value = trim($value);
+
+        // remove surrounding quotes
+        $value = trim($value, '"\'');
+
+        $_ENV[$key] = $value;
     }
 }
