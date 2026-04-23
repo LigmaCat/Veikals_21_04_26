@@ -1,5 +1,21 @@
 <h1>Orders</h1>
 
+<a href="/orders">
+    <button>All</button>
+</a>
+
+<a href="/orders?status=pending">
+    <button>Pending</button>
+</a>
+
+<a href="/orders?status=processing">
+    <button>Processing</button>
+</a>
+
+<a href="/orders?status=delivered">
+    <button>Delivered</button>
+</a>
+
 <ul>
     <?php foreach ($orders as $index => $order): ?>
         <li style="margin-bottom: 15px;">

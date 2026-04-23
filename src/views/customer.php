@@ -11,9 +11,22 @@
 <ul>
     <?php foreach ($customers as $customer): ?>
         <li>
-            <strong>
-                <?= htmlspecialchars($customer['first_name']) ?>
-            </strong>
+<div style="margin-bottom: 10px;">
+
+    <strong style="font-size: 18px;">
+        <?= htmlspecialchars($customer['first_name']) ?>
+        <?= htmlspecialchars($customer['last_name'] ?? '') ?>
+    </strong><br>
+
+    <strong>Email:</strong>
+    <?= htmlspecialchars($customer['email']) ?><br>
+
+    <?php if (!empty($customer['phone'])): ?>
+        <strong>Phone:</strong>
+        <?= htmlspecialchars($customer['phone']) ?><br>
+    <?php endif; ?>
+
+</div>
 
 <!-- ORDERS -->
 <?php if ($showOrders && !empty($customer['orders'])): ?>

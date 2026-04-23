@@ -51,7 +51,9 @@ class Customer {
         $customers[] = [
             'customer_id' => $row['customer_id'],
             'first_name' => $row['first_name'],
+            'last_name' => $row['last_name'] ?? '',
             'email' => $row['email'],
+            'points' => $row['points'] ?? 0,
             'orders' => [] // keep structure consistent
         ];
     }
